@@ -1,2 +1,2 @@
-Moses Hamm
-Collection of CFD projects
+title: [CFD Projects]
+description: [A collection of projects in CFD]
