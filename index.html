@@ -103,14 +103,16 @@
           intra-element movement, a second step is needed. In the second step, the program calculates the fraction of the cell occupied by the wall \(f_{wall}\) 
           and uses it to update the near-wall variables. Velocity is set as a weighted average of the wall's velocity \(u_{wall}\) and the fluid velocity 
           from the previous time step \(u_{fluid}\). Pressure is simply extrapolated from the adjacent cell. Density is updated based on the change in effective
-          area (i.e., area not occupied by the wall) according to the following equations: 
+          area (i.e., area not occupied by the wall) which is calculated according to the following equations: 
           The initial volume of the cell is \[V_0 = dxdy\]
           The change in effective volume in the current time step is \[\Delta V_{step} = u_{wall}dt\]
           The accumulated change in effective volume is \[\Delta V_{accumulated} = f_{wall}dxdy\]
           Finally, the total change in effective volume of the cell is \[\frac{\Delta V_{total}}{V_0} 
-          = \frac{(\f_{wall})(u_{wall}dt)}{dxdy} 
+          = \frac{(f_{wall})(u_{wall}dt)}{dxdy} 
           = f_{wall}\frac{u_{wall}dt}{dx}\]
-          
+
+          Conservation of mass for the control volume yields \[\rho_0 V_0 = rho^' V^' = \rho^' (V_0 - \Delta V_{total} \]
+          where prime denotes the updated variable. Simplification leads to \[rho^' 
 
           
           
