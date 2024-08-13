@@ -108,11 +108,11 @@
           The change in effective volume in the current time step is \[\Delta V_{step} = u_{wall}dt\]
           The accumulated change in effective volume is \[\Delta V_{accumulated} = f_{wall}dxdy\]
           Finally, the total change in effective volume of the cell is \[\frac{\Delta V_{total}}{V_0} 
-          = \frac{(f_{wall})(u_{wall}dt)}{dxdy} 
-          = f_{wall}\frac{u_{wall}dt}{dx}\]
+          = \frac{(f_{wall}dxdy)(u_{wall}dt)}{dxdy} 
+          = \frac{f_{wall}u_{wall}dt}{dx}\]
 
           Conservation of mass for the control volume yields \[\rho_0 V_0 = rho^' V^' = \rho^' (V_0 - \Delta V_{total} \]
-          where prime denotes the updated variable. Simplification leads to \[rho^' 
+          where prime denotes the updated variable. Simplification leads to \[rho^' = \frac{\rho_0}{1-f_(wall
 
           
           
