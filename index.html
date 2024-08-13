@@ -113,11 +113,29 @@
           Conservation of mass for the control volume is \[\rho_0 V_0 = \rho^{'} V^{'} = \rho^{'} (V_0 - \Delta V_{total}) \]
           where prime denotes the updated variable. Simplification leads to \[\rho^{'} = \frac{\rho_0}{1-\frac{\Delta V}{V_0}}\] 
           Substituting in the change in effective volume yields the formula for updating near-wall density \[\rho^{'} = \frac{\rho_0}{1-\frac{f_{wall}u_{wall}}{dx}}\].
-          Finally, continuity is enforced by adding the mass displaced by the piston.  
-          
+          Finally, continuity is enforced by finding the mass displaced by the piston and adding it to the adjacent cell.
         </p>
-
       </section>
+
+      <!-- BCs-->
+      <section id="boundaries">
+        <h2>Boundary and Initial Conditions</h2>
+        <ul>
+          <li>North, south, and east walls: isothermal rigid slip walls</li>
+          <li>West wall: isothermal slip wall moving east with constant velocity of 5m/s </li>
+          <li>Fluid: air</li>
+          <li>Temperature: 293K, 1atm </li>
+          <li>Pressure: 101,000 Pa </li>
+        </ul>
+        <figure>
+          <img
+            src="figures/computational_setup_BC.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+      </section>
+
       
     </main>
     <!-- ./ Main -->
