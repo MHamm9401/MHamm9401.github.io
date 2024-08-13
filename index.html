@@ -134,7 +134,7 @@
       
       <!-- Verification-->
       <section id="verification">
-        <h3>Verification</h3>
+        <h2>Verification</h2>
         <p>
           Two code verification activities were undertaken. 
           <ol type="1">
@@ -146,7 +146,7 @@
       
       <!-- Verification-->
       <section id="track_verification">
-        <h4>Wall Tracking Verification</h4>
+        <h3>Wall Tracking Verification</h3>
         <p>
           Before coding the physics of the moving wall, verification of the wall tracking was performed. There were three parameters of interest: 
           <ol type="1">
@@ -176,7 +176,7 @@
       
       <!-- Verification-->
       <section id="COM_verification">
-        <h4>Continuity Verification</h4>
+        <h3>Continuity Verification</h3>
         <p>
           After completing the physics of the moving wall, conservation of mass was verified by multiplying the sum of the density by the instantaneous 
           effective volume of the piston. On the first iteration of the boundary condition, the piston lost a significant amound of mass as shown below. <br>
@@ -198,7 +198,19 @@
             height="475"
             class="center"
           />
-            
+        </p>
+      </section>
+
+      <!-- Validation>
+      <section id="validation">
+        <h2>Validation</h2>
+        <p>
+          In a piston, it is important to be able to accurately predict the pressure and volume of the system. 
+          Therefore, the pressure-volume term of the ideal gas law was chosen as a validation quantity. Neglecting heat transfer, PV is a 
+          constant in an ideal gas system. Initially, the pressure was 101,000Pa and the volume was 4m^2, yielding a total energy of 404,000J. 
+          At the end of the simulation, the average pressure was 124,531Pa and the volume was 3.04m^2, yielding a total energy of 378,574J. 
+          This is an error of approximately 6.5% in the quantity of interest. While there is certainly room for improvement, a prediction within 10% may be 
+          useful in quick-and-dirty analyses. 
         </p>
       </section>
       
