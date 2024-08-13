@@ -111,9 +111,10 @@
           = \frac{(f_{wall}dxdy)(u_{wall}dydt)}{dxdy} 
           = \frac{f_{wall}u_{wall}dt}{dx}\]
 
-          Conservation of mass for the control volume yields \[\rho_0 V_0 = rho^' V^' = \rho^' (V_0 - \Delta V_{total} \]
-          where prime denotes the updated variable. Simplification leads to \[rho^' = \frac{\rho_0}{1-f_(wall
-
+          Conservation of mass for the control volume is \[\rho_0 V_0 = rho^' V^' = \rho^' (V_0 - \Delta V_{total}) \]
+          where prime denotes the updated variable. Simplification leads to \[rho^' = \frac{\rho_0}{1-\frac{\Delta V}{V_0}}. 
+          Substituting in the change in effective volume yields the final form \[rho^' = \frac{\rho_0}{1-\frac{f_{wall}u_{wall}}{dx}.
+          
           
           
         </p>
