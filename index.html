@@ -118,22 +118,18 @@
       </section>
 
       <!-- BCs-->
-      <section id="boundaries">
-        <h2>Boundary and Initial Conditions</h2>
+      <section id="solver">
+        <h2>Solver</h2>
         <ul>
-          <li>North, south, and east walls: isothermal rigid slip walls</li>
-          <li>West wall: isothermal slip wall moving east with constant velocity of 5m/s </li>
-          <li>Fluid: air</li>
-          <li>Temperature: 293K, 1atm </li>
-          <li>Pressure: 101,000 Pa </li>
+          <li>Finite Volume Method solver with Lax-Friedrichs artificial viscosity: \[\frac{\Delta x^{2}}{2\Delta t}\] </li>
+          <li>2D Euler equations for inviscid compressible flow: 
+            \[\frac{\delta \rho}{\delta t} + \frac{\delta}{\delta x}(\rho u) + \frac{\delta}{\delta y}(\rho v) = 0\]
+            \[\frac{\delta \rho u}{\delta t} + \frac{\delta}{\delta x}(\rho u u) + \frac{\delta}{\delta y}(\rho u v) + \frac{\delta P}{\delta x} = 0\]
+            \[\frac{\delta \rho v}{\delta t} + \frac{\delta}{\delta x}(\rho u v) + \frac{\delta}{\delta y}(\rho v v) + \frac{\delta P}{\delta y} = 0\]
+            \[\frac{\delta E}{\delta t} + \frac{\delta}{\delta x}(u[E + P]) + \frac{\delta}{\delta y}(u[E + P]) = 0\]
+          </li>
+          <li>Thermodynamic model: ideal gas \[P = \rho R T\] </li>
         </ul>
-        <figure>
-          <img
-            src="figures/computational_setup_BC.png"
-            width="66%"
-            class="center"
-          />
-        </figure>
       </section>
 
       
