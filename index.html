@@ -117,7 +117,7 @@
         </p>
       </section>
 
-      <!-- BCs-->
+      <!-- Solver-->
       <section id="solver">
         <h2>Solver</h2>
         <ul>
@@ -129,6 +129,23 @@
             \[\frac{\delta E}{\delta t} + \frac{\delta}{\delta x}(u[E + P]) + \frac{\delta}{\delta y}(v[E + P]) = 0\]
           </li>
           <li>Thermodynamic model: ideal gas \[P = \rho R T\] </li>
+          <li>Time: transient with a wall CFL = 0.05  </li>
+          <li>Simulation was advanced until the wall had advanced 1m into the domain </li>
+        </ul>
+      </section>
+
+      <!-- Results>
+      <section id="results">
+        <h2>Results</h2>
+        
+      <video width="1000" height="1000" controls>
+          <source src="https://github.com/MHamm9401/MHamm9401.github.io/raw/main/figures/LF2_Wall_Physics_Long.mp4" 
+            type="video/mp4"
+          >
+      </video>         
+      <ul>
+          <li>Pressure waves bounce off right wall initially, then equalize in a high pressure region </li>
+          <li>Similar phenomenon observed in velocity glyphs </li>
         </ul>
       </section>
       
