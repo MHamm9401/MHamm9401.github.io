@@ -102,11 +102,11 @@
           a rigid slip wall condition on their west walls. However, this approach can only capture element-sized movements of the wall. In order to capture 
           intra-element movement, a second step is needed. In the second step, the program calculates the fraction of the cell occupied by the wall \(f_{wall}\)
           and the change in effective volume of the cell \(\frac{\Delta V}{V_0}\) according to the following equations: <br>
-          The initial volume of the cell is \(V_0 = dx*dy\) <br>
-          The change in effective volume in one time step is \(\Delta V_{step} = u_{wall} * dt\) <br>
-          The wall fraction is \(f_{wall} = \frac{V_{wall}}{V_0}\) <br>
+          The initial volume of the cell is \[V_0 = dxdy\]
+          The change in effective volume in one time step is \[\Delta V_{step} = u_{wall}dt\]
+          The wall fraction is \[f_{wall} = \frac{V_{wall}}{V_0}\]
+          Finally, the total change in effective volume of the cell is \[\frac{\Delta V}{V_0} = f_{wall}\frac{u_{wall}dt}{dx}\]
           
-          \[\frac{\Delta V}{V_0} = f_{wall} * \frac{u_{wall} * dt}{dx}\] <br>
 
           
           
