@@ -104,15 +104,15 @@
           and uses it to update the near-wall variables. Pressure is simply extrapolated from the adjacent cell. Velocity is set as a weighted average of the wall's velocity \(u_{wall}\) and the fluid velocity 
           from the previous time step \(u_{fluid}\). Density is updated based on the change in effective
           area (i.e., area not occupied by the wall) which is calculated according to the following equations: 
-          The initial volume of the cell is \[V_0 = dxdy\]
-          The change in effective volume in the current time step is \[\Delta V_{step} = u_{wall}dydt\]
-          The accumulated change in effective volume is \[\Delta V_{accumulated} = f_{wall}dxdy\]
-          Finally, the total change in effective volume of the cell is \[\frac{\Delta V_{total}}{V_0} 
+          The initial area of the cell is \[V_0 = dxdy\]
+          The change in effective area in the current time step is \[\Delta V_{step} = u_{wall}dydt\]
+          The accumulated change in effective area is \[\Delta V_{accumulated} = f_{wall}dxdy\]
+          Finally, the total change in effective area of the cell is \[\frac{\Delta V_{total}}{V_0} 
           = \frac{(f_{wall}dxdy)(u_{wall}dydt)}{dxdy} 
           = \frac{f_{wall}u_{wall}dt}{dx}\]
-          Conservation of mass for the control volume is \[\rho_0 V_0 = \rho^{'} V^{'} = \rho^{'} (V_0 - \Delta V_{total}) \]
+          Conservation of mass for the control area is \[\rho_0 V_0 = \rho^{'} V^{'} = \rho^{'} (V_0 - \Delta V_{total}) \]
           where prime denotes the updated variable. Simplification leads to \[\rho^{'} = \frac{\rho_0}{1-\frac{\Delta V}{V_0}}\] 
-          Substituting in the change in effective volume yields the formula for updating near-wall density \[\rho^{'} = \frac{\rho_0}{1-\frac{f_{wall}u_{wall}}{dx}}\].
+          Substituting in the change in effective area yields the formula for updating near-wall density \[\rho^{'} = \frac{\rho_0}{1-\frac{f_{wall}u_{wall}}{dx}}\].
           Finally, continuity is enforced by finding the mass displaced by the piston and adding it to the adjacent cell.
         </p>
       </section>
@@ -121,12 +121,12 @@
       <section id="solver">
         <h2>Solver</h2>
         <ul>
-          <li>Finite Volume Method solver with Lax-Friedrichs artificial viscosity: \[\frac{\Delta x^{2}}{2\Delta t}\] </li>
+          <li>Finite Volume Method solver with Lax-Friedrichs artificial viscosity: \[\alpha_{artificial} = \frac{\Delta x^{2}}{2\Delta t}\] </li>
           <li>2D Euler equations for inviscid compressible flow: 
             \[\frac{\delta \rho}{\delta t} + \frac{\delta}{\delta x}(\rho u) + \frac{\delta}{\delta y}(\rho v) = 0\]
             \[\frac{\delta \rho u}{\delta t} + \frac{\delta}{\delta x}(\rho u u) + \frac{\delta}{\delta y}(\rho u v) + \frac{\delta P}{\delta x} = 0\]
             \[\frac{\delta \rho v}{\delta t} + \frac{\delta}{\delta x}(\rho u v) + \frac{\delta}{\delta y}(\rho v v) + \frac{\delta P}{\delta y} = 0\]
-            \[\frac{\delta E}{\delta t} + \frac{\delta}{\delta x}(u[E + P]) + \frac{\delta}{\delta y}(u[E + P]) = 0\]
+            \[\frac{\delta E}{\delta t} + \frac{\delta}{\delta x}(u[E + P]) + \frac{\delta}{\delta y}(v[E + P]) = 0\]
           </li>
           <li>Thermodynamic model: ideal gas \[P = \rho R T\] </li>
         </ul>
