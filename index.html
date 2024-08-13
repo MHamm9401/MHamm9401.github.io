@@ -101,7 +101,14 @@
           The moving wall is implemented in two steps. In the first step, the program identifies which mesh elements the wall is currently in and imposes 
           a rigid slip wall condition on their west walls. However, this approach can only capture element-sized movements of the wall. In order to capture 
           intra-element movement, a second step is needed. In the second step, the program calculates the fraction of the cell occupied by the wall \(f_wall\)
-          and the change in effective volume of the cell \(\frac{\delta\V}{V_0}\) according to the following equations.
+          and the change in effective volume of the cell \(\frac{\delta V}{V_0}\) according to the following equations: <br>
+          The initial volume of the cell is \(V_0 = dx*dy\) <br>
+          The change in effective volume in one time step is \(\delta V_step = u_wall * dt\) <br>
+          The wall fraction is \(f_wall = \frac{\V_wall}{V_0}\) <br>
+          
+          \[\frac{\delta V}{V_0} = f_wall * \frac{u_wall * dt}{dx}\] <br>
+
+          
           
           
           
