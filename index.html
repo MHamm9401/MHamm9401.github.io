@@ -99,11 +99,11 @@
         <h4>Moving Wall Boundary Condition</h4>
         <p>
           The moving wall is implemented in two steps. In the first step, the program identifies which mesh elements the wall is currently in and imposes 
-          a rigid slip wall condition on their west walls. However, this approach can only capture element-sized movements of the wall. In order to capture 
+          a rigid slip wall condition on their west face. However, this approach can only capture element-sized movements of the wall. In order to capture 
           intra-element movement, a second step is needed. In the second step, the program calculates the fraction of the cell occupied by the wall \(f_{wall}\) 
-          and uses it to update the near-wall variables. Pressure is simply extrapolated from the adjacent cell. Velocity is set as a weighted average of the wall's velocity \(u_{wall}\) and the fluid velocity 
-          from the previous time step \(u_{fluid}\). Density is updated based on the change in effective
-          area (i.e., area not occupied by the wall) which is calculated according to the following equations: 
+          and uses it to update the variables in cells adjacent to the wall. Pressure is simply extrapolated from the adjacent cell. 
+          Velocity is set as a weighted average of the wall's velocity \(u_{wall}\) and the fluid velocity from the previous time step \(u_{fluid}\). 
+          Density is updated based on the change in effective area (i.e., area not occupied by the wall) which is calculated according to the following equations: 
           The initial area of the cell is \[V_0 = dxdy\]
           The change in effective area in the current time step is \[\Delta V_{step} = u_{wall}dydt\]
           The accumulated change in effective area is \[\Delta V_{accumulated} = f_{wall}dxdy\]
@@ -112,7 +112,7 @@
           = \frac{f_{wall}u_{wall}dt}{dx}\]
           Conservation of mass for the control area is \[\rho_0 V_0 = \rho^{'} V^{'} = \rho^{'} (V_0 - \Delta V_{total}) \]
           where prime denotes the updated variable. Simplification leads to \[\rho^{'} = \frac{\rho_0}{1-\frac{\Delta V}{V_0}}\] 
-          Substituting in the change in effective area yields the formula for updating near-wall density \[\rho^{'} = \frac{\rho_0}{1-\frac{f_{wall}u_{wall}}{dx}}\].
+          Substituting in the change in effective area yields the formula for updating near-wall density \[\rho^{'} = \frac{\rho_0}{1-\frac{f_{wall}u_{wall}}{dx}}\]
           Finally, continuity is enforced by finding the mass displaced by the piston and adding it to the adjacent cell.
         </p>
       </section>
@@ -129,8 +129,9 @@
             \[\frac{\delta E}{\delta t} + \frac{\delta}{\delta x}(u[E + P]) + \frac{\delta}{\delta y}(v[E + P]) = 0\]
           </li>
           <li>Thermodynamic model: ideal gas \[P = \rho R T\] </li>
-          <li>Time: transient with a wall CFL = 0.05  </li>
-          <li>Simulation was advanced until the wall had advanced 1m into the domain </li>
+          <li>Time: transient </li>
+          <li>CFL: 0.05 </li>          
+          <li>Simulation was advanced until the wall advanced 1m into the domain </li>
         </ul>
       </section>
 
