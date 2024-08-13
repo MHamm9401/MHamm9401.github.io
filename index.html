@@ -50,7 +50,7 @@
       </section>
 
       <!-- Geometry-->
-      <section id="motivation">
+      <section id="geometry">
         <h3>Geometry</h3>
         <p>
           A 2D rectangle with side lengths of 1m and 4m was generated and meshed
@@ -63,7 +63,24 @@
           />
         </figure>
       </section>
-            
+
+      <!-- BCs-->
+      <section id="boundaries">
+        <h3>Boundary and Initial Conditions</h3>
+        <ul>
+          <li>North, South, and East walls: isothermal rigid slip walls</li>
+          <li>West wall: isothermal slip wall moving East with constant velocity of 5m/s </li>
+          <li>Fluid: air</li>
+          <li>Temperature: 293K, 1atm </li>
+          <li>Pressure: 101,000 Pa </li>
+        </ul>
+        <figure>
+          <img
+            src="figures/computational_setup_BC.png"
+          />
+        </figure>
+      </section>
+      
     </main>
     <!-- ./ Main -->
   </body>
