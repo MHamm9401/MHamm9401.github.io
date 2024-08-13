@@ -7,6 +7,7 @@
     <meta name="color-scheme" content="light dark" />
     <title>Moses Hamm • Projects</title>
     <meta name="description" content="Projects collection" />
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <!-- Pico.css -->
     <link
@@ -99,8 +100,13 @@
         <p>
           The moving wall is implemented in two steps. In the first step, the program identifies which mesh elements the wall is currently in and imposes 
           a rigid slip wall condition on their west walls. However, this approach can only capture element-sized movements of the wall. In order to capture 
-          intra-element movement, a second step is needed. In the second step, the program calculates the change in effective volume of the element that the
-          wall 
+          intra-element movement, a second step is needed. In the second step, the program calculates the fraction of the cell occupied by the wall \(f_wall\)
+          and the change in effective volume of the cell \(\frac{\delta\V}{V_0}\) according to the following equations.
+          
+          
+          
+          change in effective volume of the element that the
+          wall is currently in. This change in volume is used to update the density 
           Quadratic Formula: x = (-b &plusmn; &radic;(b<sup>2</sup> - 4ac)) / 2a
         </p>
 
