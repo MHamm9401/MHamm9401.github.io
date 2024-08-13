@@ -105,17 +105,15 @@
           from the previous time step \(u_{fluid}\). Pressure is simply extrapolated from the adjacent cell. Density is updated based on the change in effective
           area (i.e., area not occupied by the wall) according to the following equations: 
           The initial volume of the cell is \[V_0 = dxdy\]
-          The change in effective volume in one time step is \[\Delta V_{step} = u_{wall}dt\]
-          Finally, the total change in effective volume of the cell is \[\frac{\Delta V_{total}}{V_0} = f_{wall}\frac{u_{wall}dt}{dx}\]
+          The change in effective volume in the current time step is \[\Delta V_{step} = u_{wall}dt\]
+          The accumulated change in effective volume is \[\Delta V_{accumulated} = f_{wall}dxdy\]
+          Finally, the total change in effective volume of the cell is \[\frac{\Delta V_{total}}{V_0} 
+          = \frac{(\f_{wall})(u_{wall}dt)}{dxdy} 
+          = f_{wall}\frac{u_{wall}dt}{dx}\]
           
 
           
           
-          
-          
-          change in effective volume of the element that the
-          wall is currently in. This change in volume is used to update the density 
-          Quadratic Formula: x = (-b &plusmn; &radic;(b<sup>2</sup> - 4ac)) / 2a
         </p>
 
       </section>
