@@ -155,13 +155,11 @@
             <li>Wall fraction </li>
           </ol>
         The calculated wall position was evaluated to ensure it matched hand calculations based on the time and velocity. <br>
-        </p>
         <video width="640" height="480" controls>
           <source src="https://github.com/MHamm9401/MHamm9401.github.io/raw/main/figures/LF1_Wall_NoPhysics.mp4" 
             type="video/mp4"
           >
         </video>    
-        <p>
         <br>
         The wall index calculated by the code was compared to hand calculations and plotted to ensure that a pattern of repeated step functions occurred. 
         Finally, the wall index was compared to hand calculations and plotted to ensure that it was bounded between 0 and 1. <br>
@@ -181,20 +179,28 @@
         <h4>Continuity Verification</h4>
         <p>
           After completing the physics of the moving wall, conservation of mass was verified by multiplying the sum of the density by the instantaneous 
-          effective volume of the piston. On the first iteration of the boundary condition, the piston lost a significant amound of mass as shown below. 
-          This led to the addition of a Neumann mass flux condition to enforce conservation of mass. After this addition, continuity was signficantly 
-          improved. There is a transient spike in mass, but the mass then levels out and remains stable. <br>
+          effective volume of the piston. On the first iteration of the boundary condition, the piston lost a significant amound of mass as shown below. <br>
         <figure>
           <img
-            src="figures/wall_tracker.png"
+            src="figures/CoM_noFluxBC.png"
             width="630"
             height="475"
             class="center"
-            <figcaption>Continuity verification before </figcaption>
+            <figcaption>Continuity verification before Neumann mass flux boundary condition. </figcaption>
           />
         </figure>
-
-          However, when the wall enters a new cell, there is still some change in the mass of the system. 
+          This led to the addition of a Neumann mass flux condition to enforce conservation of mass. After this addition, continuity was signficantly 
+          improved. However, when the wall enters a new cell, there is still some change in the mass of the system. 
+          Overall, there is a transient spike in mass, but the mass then levels out and remains stable, as shown below. 
+          <figure>
+          <img
+            src="figures/CoM_withFluxBC.png"
+            width="630"
+            height="475"
+            class="center"
+            <figcaption>Continuity verification after Neumann mass flux boundary condition. </figcaption>
+          />
+            
         </p>
       </section>
       
