@@ -37,12 +37,17 @@
     <main class="container">
       <!-- FSI Overview -->
       <section id="preview">
-        <h2><a href="https://engineering.purdue.edu/CFML">Cardiovascular Flow Modeling Lab</a>
-        </h2>
+        <h2>Cardiovascular Flow Modeling Lab</h2>
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/LabPhoto_2023.jpg"
+            width="66%"
+            class="center"
+          /> 
+          </figure>
         <p>
-          In this project, I simulated compression of an ideal gas in a 2D piston in
-          Python without the use of dedicated CFD libraries. This involved coding a finite volume method (FVM) solver with Lax-Friedrichs artificial viscosity
-          to solve the Euler equations for compressible inviscid flows and creating a custom boundary condition to simulate a moving wall. 
+          I have worked under Dr. Vitaliy Rayz and Dr. Neal Patel in the <a href="https://engineering.purdue.edu/CFML">Cardiovascular Flow Modeling Lab</a>
+          since my sophomore
         </p>
       </section>
       <!-- ./ FSI Overview -->
