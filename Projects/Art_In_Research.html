@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- HEADING DOES NOT PRINT TO THE SCREEN -->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Moses Hamm • Projects</title>
+    <meta name="description" content="Projects collection" />
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Pico.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css"
+    />
+
+    <style>
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    </style>    
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="container">
+      <hgroup>
+        <h1>Art Page</h1>
+        <p>A collection of simulation, coding, and physical projects. For questions, contact me at hammmj@purdue.edu or 
+          www.linkedin.com/in/moses-hamm.  </p>
+      </hgroup>
+    </header>
+    <!-- ./ Header -->
+    
+    <!-- Main -->
+    <main class="container">
+      <!-- FSI Overview -->
+      <section id="preview">
+        <h2>Piston Fluid-Structure Interaction Simulation</h2>
+        <p>
+          In this project, I simulated compression of an ideal gas in a 2D piston in
+          Python without the use of dedicated CFD libraries. 
+        </p>
+      </section>
+      <!-- ./ FSI Overview -->
+
+      <!-- Motivation-->
+      <section id="motivation">
+        <h3>Motivation</h3>
+        <p>
+          As a biomedical engineer, I am interested in modeling the cardiovascular system. 
+          In particular, I am interested in cardiac flows, which are often investigated 
+          through fluid-structure interaction simulations with moving walls. I wanted to
+          maintain the concept of a moving wall while simplifying the problem to a practical 
+          level. Therefore, I chose to model a piston compressing an ideal gas. 
+        </p>
+      </section>
+
+      <!-- Geometry-->
+      <section id="geometry">
+        <h3>Geometry</h3>
+        <p>
+          A 2D rectangle with side lengths of 1m and 4m was generated and meshed
+          using a structured rectangular grid resulting in 4000 mesh elements. 
+        </p>
+
+        <figure>
+          <img
+            src="figures/computational_geometry.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+      </section>
+
+      <!-- BCs-->
+      <section id="boundaries">
+        <h3>Boundary and Initial Conditions</h3>
+        <ul>
+          <li>North, south, and east walls: isothermal rigid slip walls</li>
+          <li>West wall: isothermal slip wall moving east with constant velocity of 5m/s </li>
+          <li>Fluid: air</li>
+          <li>Temperature: 293K, 1atm </li>
+          <li>Pressure: 101,000 Pa </li>
+        </ul>
+        <figure>
+          <img
+            src="figures/computational_setup_BC.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+      </section>
+
+      <!-- BCs-->
+      <section id="wall">
+        <h4>Moving Wall Boundary Condition</h4>
+        <p>
+          The moving wall is implemented in two steps. In the first step, the program identifies which mesh elements the wall is currently in and imposes 
+          a rigid slip wall condition on their west face. However, this approach can only capture element-sized movements of the wall. In order to capture 
+          intra-element movement, a second step is needed. In the second step, the program calculates the fraction of the cell occupied by the wall \(f_{wall}\) 
+          and uses it to update the variables in cells adjacent to the wall. Pressure is simply extrapolated from the adjacent cell. 
+          Velocity is set as a weighted average of the wall's velocity \(u_{wall}\) and the fluid velocity from the previous time step \(u_{fluid}\). 
+          Density is updated based on the change in effective area (i.e., area not occupied by the wall) which is calculated according to the following equations: 
+          The initial area of the cell is \[V_0 = dxdy\]
+          The change in effective area in the current time step is \[\Delta V_{step} = u_{wall}dydt\]
+          The accumulated change in effective area is \[\Delta V_{accumulated} = f_{wall}dxdy\]
+          Finally, the total change in effective area of the cell is \[\frac{\Delta V_{total}}{V_0} 
+          = \frac{(f_{wall}dxdy)(u_{wall}dydt)}{dxdy} 
+          = \frac{f_{wall}u_{wall}dt}{dx}\]
+          Conservation of mass for the control area is \[\rho_0 V_0 = \rho^{'} V^{'} = \rho^{'} (V_0 - \Delta V_{total}) \]
+          where prime denotes the updated variable. Simplification leads to \[\rho^{'} = \frac{\rho_0}{1-\frac{\Delta V}{V_0}}\] 
+          Substituting in the change in effective area yields the formula for updating near-wall density \[\rho^{'} = \frac{\rho_0}{1-\frac{f_{wall}u_{wall}}{dx}}\]
+          Finally, continuity is enforced by finding the mass displaced by the piston and adding it to the adjacent cell.
+        </p>
+      </section>
+
+      <!-- Solver-->
+      <section id="solver">
+        <h2>Solver</h2>
+        <ul>
+          <li>Finite Volume Method solver with Lax-Friedrichs artificial viscosity: \[\alpha_{artificial} = \frac{\Delta x^{2}}{2\Delta t}\] </li>
+          <li>2D Euler equations for inviscid compressible flow: 
+            \[\frac{\delta \rho}{\delta t} + \frac{\delta}{\delta x}(\rho u) + \frac{\delta}{\delta y}(\rho v) = 0\]
+            \[\frac{\delta \rho u}{\delta t} + \frac{\delta}{\delta x}(\rho u u) + \frac{\delta}{\delta y}(\rho u v) + \frac{\delta P}{\delta x} = 0\]
+            \[\frac{\delta \rho v}{\delta t} + \frac{\delta}{\delta x}(\rho u v) + \frac{\delta}{\delta y}(\rho v v) + \frac{\delta P}{\delta y} = 0\]
+            \[\frac{\delta E}{\delta t} + \frac{\delta}{\delta x}(u[E + P]) + \frac{\delta}{\delta y}(v[E + P]) = 0\]
+          </li>
+          <li>Thermodynamic model: ideal gas \[P = \rho R T\] </li>
+          <li>Time: transient </li>
+          <li>CFL: 0.05 </li>          
+          <li>Simulation was advanced until the wall advanced 1m into the domain </li>
+        </ul>
+      </section>
+
+      <!-- Results-->
+      <section id="results">
+        <h2>Results</h2>
+        
+      <video width="700" height="700" controls>
+          <source src="https://github.com/MHamm9401/MHamm9401.github.io/raw/main/figures/LF2_Wall_Physics_Long.mp4" 
+            type="video/mp4"
+          >
+      </video>         
+      <ul>
+          <li>Pressure waves bounce off right wall initially, then equalize in a high pressure region </li>
+          <li>Similar phenomenon observed in velocity glyphs </li>
+        </ul>
+      </section>
+      
+      <!-- Verification-->
+      <section id="verification">
+        <h2>Verification</h2>
+        <p>
+          Two code verification activities were undertaken. 
+          <ol type="1">
+            <li>Wall tracking verification</li>
+            <li>Continuity verification </li>
+          </ol>
+        </p>
+      </section>
+      
+      <!-- Verification-->
+      <section id="track_verification">
+        <h3>Wall Tracking Verification</h3>
+        <p>
+          Before coding the physics of the moving wall, verification of the wall tracking was performed. There were three parameters of interest: 
+          <ol type="1">
+            <li>Wall position</li>
+            <li>Wall index </li>
+            <li>Wall fraction </li>
+          </ol>
+        A simulation was run until the wall advanced approximately 1.5m into the domain. Afterwards, the calculated wall position was evaluated 
+        to ensure it matched hand calculations based on the time and velocity. <br>
+        <video width="640" height="480" controls>
+          <source src="https://github.com/MHamm9401/MHamm9401.github.io/raw/main/figures/LF1_Wall_NoPhysics.mp4" 
+            type="video/mp4"
+          >
+        </video>    
+        <br>
+        The wall index calculated by the code was compared to hand calculations and plotted to ensure that a pattern of repeated step functions occurred. 
+        Finally, the wall index was compared to hand calculations and plotted to ensure that it was bounded between 0 and 1. <br>
+        <figure>
+          <img
+            src="figures/wall_tracker.png"
+            width="630"
+            height="475"
+            class="center"
+          />
+        </figure>
+        </p>
+      </section>
+      
+      <!-- Verification-->
+      <section id="COM_verification">
+        <h3>Continuity Verification</h3>
+        <p>
+          After completing the physics of the moving wall, simulations were run and conservation of mass was verified by multiplying the sum of the density by the instantaneous 
+          effective volume of the piston. On the first iteration of the boundary condition, the piston lost a significant amound of mass as shown below. <br>
+        <figure>
+          <img
+            src="figures/CoM_noFluxBC.png"
+            width="630"
+            height="475"
+            class="center"
+          />
+        </figure>
+          This led to the addition of a Neumann mass flux condition to enforce conservation of mass. After this addition, continuity was signficantly 
+          improved. However, when the wall enters a new cell, there is still some change in the mass of the system. 
+          Overall, there is a transient spike in mass, but the mass then levels out and remains stable, as shown below. 
+          <figure>
+          <img
+            src="figures/CoM_withFluxBC.png"
+            width="630"
+            height="475"
+            class="center"
+          />
+        </p>
+      </section>
+
+      <!-- Validation-->
+      <section id="validation">
+        <h2>Validation</h2>
+        <p>
+          In a piston, it is important to be able to accurately predict the pressure and volume of the system. 
+          Therefore, the pressure-volume term of the ideal gas law was chosen as a validation quantity. Neglecting heat transfer, PV is a 
+          constant in an ideal gas system. 
+          <ul>
+            <li>Initial: P = 101,000Pa V = 4m^2, PV = 404,000J</li>
+            <li>Final: P = 124,531Pa V = 3.04m^2, PV = 378,574J</li>
+            <li>Error of approximately 6.5% in quantity of interest</li>
+          </ul> 
+          While there is a lot of room for improvement, a prediction within 10% may be useful in a quick-and-dirty analysis. 
+        </p>
+      </section>
+
+      <!-- MORE SOON-->
+      <section id="more">
+        <h2>MORE COMING SOON!</h2>
+      <ul>
+          <li>Creeping Flow in a Wedge (Album of Fluid Motion) </li>
+          <li>Art in Research </li>
+          <li>Turbomachinery Simulation
+        </ul>
+      </section>
+
+
+      
+    </main>
+    <!-- ./ Main -->
+  </body>
+
+  
+</html>
