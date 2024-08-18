@@ -66,18 +66,26 @@
       <section id="geometry">
         <h3>Geometry</h3>
         <p>
-          A 2D rectangle with side lengths of 1m and 4m was generated and meshed
-          using a structured rectangular grid resulting in 4000 mesh elements. 
+         The first section of the nozzle has a diameter of 12mm. The nozzle gradually tapers to a diameter of 4mm before a sudden expansion to the original 
+         diameter of 12mm.
         </p>
 
         <figure>
           <img
-            src="https://MHamm9401.github.io/figures/computational_geometry.png"
+            src="https://MHamm9401.github.io/figures/nozzle_geometry.jpg"
             width="66%"
             class="center"
           />
         </figure>
+        
+        <p>
+          To prepare the geometry for simulation, three edits were made. First, the geometry was cut in half axially to take advantage of its symmetry. 
+          Next, the 90 degree corners at the sudden expansion were chamfered with a radius of 0.2mm to make meshing easier. Last, the inlet and outlet were 
+          extended to a distance of 10D to allow flow profiles to develop and minimize artifacts due to the boundary conditions. 
+        </p> 
       </section>
+
+      
 
       <!-- BCs-->
       <section id="boundaries">
