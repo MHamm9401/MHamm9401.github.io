@@ -176,17 +176,63 @@
 
       <!-- Results-->
       <section id="results">
-        <h3>Results</h3>
+        <h3>Iterative Convergence</h3>
+        <p>
+          The simulation was considered well-converged based on the following criteria: 
+        <ul>
+          <li>continuity, velocity, and turbulence residuals dropped five orders of magnitude</li>
+
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/residuals.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+          
+          <li>Monitored variables (pressure drop and jet velocity) leveled out at physically reasonable values</li>
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/pressure_monitor.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
         
-      <video width="700" height="700" controls>
-          <source src="https://github.com/MHamm9401/MHamm9401.github.io/raw/main/figures/LF2_Wall_Physics_Long.mp4" 
-            type="video/mp4"
-          >
-      </video>         
-      <ul>
-          <li>Pressure waves bounce off right wall initially, then equalize in a high pressure region </li>
-          <li>Similar phenomenon observed in velocity glyphs </li>
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/velocity_monitor.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+        </ul>  
+        </p>
+      </section>
+            <!-- Results-->
+      <section id="results">
+        <h3>Grid Convergence</h3>
+        <p>
+          A grid convergence study using four meshes was performed at Re=5000. All meshes shared the same inflation layer, and the body mesh sizing was varied 
+          such that the number of elements roughly doubled with each level of refinement. The edge length and element count for each mesh were: 
+        <ul>
+          <li>Coarse: 3e-4m (42k elements)</li>
+          <li>Medium: 1.5e-4m (117k elements)</li>
+          <li>Fine: 1e-4m (220k elements)</li>
+          <li>Finest: 7.5e-5m (360k elements)</li>
         </ul>
+          The axial velocity at the centerline was plotted for each case to assess qualitative convergence. 
+          In addition, a convergence criteria of 5% on the pressure drop and jet velocity was used to quantitatively assess convergence. 
+
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/residuals.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+        </ul>  
+        </p>
       </section>
       
       <!-- Verification-->
