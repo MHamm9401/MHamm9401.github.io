@@ -62,12 +62,25 @@
         </p>
       </section>
 
+      <!-- Motivation-->
+      <section id="motivation">
+        <h3>Objective</h3>
+        <p>
+          The objective of this CFD analysis is to provide:
+          <ul>
+            <li>qualitative descriptions of flow through the FDA benchmark nozzle at Re=6500</li>
+            <li>qualitative comparisons to experimental data </li>
+            <li>quantitative steady-state results in the form of pressure drop across the nozzle and jet velocity</li>
+          </ul> 
+        </p>
+      </section>
+
       <!-- Geometry-->
       <section id="geometry">
         <h3>Geometry</h3>
         <p>
-         The first section of the nozzle has a diameter of 12mm. The nozzle gradually tapers to a diameter of 4mm before a sudden expansion to the original 
-         diameter of 12mm.
+          The FDA nozzle (shown below) consists of an initial section with diameter 12mm, a taper region, a throat with diameter 4mm, and a sudden expansion 
+          back to 12mm. Details of the entrance/exit lengths were left up to modelers.  
         </p>
 
         <figure>
@@ -80,22 +93,23 @@
         
         <p>
           To prepare the geometry for simulation, three edits were made. First, the geometry was cut in half axially to take advantage of its symmetry. 
-          Next, the 90 degree corners at the sudden expansion were chamfered with a radius of 0.2mm to make meshing easier. Last, the inlet and outlet were 
-          extended to a distance of 10D to allow flow profiles to develop and minimize artifacts due to the boundary conditions. 
-        </p> 
+          Next, the 90 degree corners at the sudden expansion were chamfered with a radius of 0.2mm to aid in meshing. Last, the entrance and exits were 
+          extended to a distance of \(10D_{max}\) to allow flow profiles to develop and minimize artifacts due to the boundary conditions. 
+        </p>
       </section>
 
-      <!-- Geometry-->
+      <!-- Mesh>
       <section id="mesh">
         <h3>Meshing</h3>
         <p>
-          An unstructured all-quad mesh with inflation layers was generated using the Multizone Quad method and Inflation tool in Ansys Meshing.
+          An unstructured all-quad mesh with edge lengths of 1.5e-4m and 25 inflation layers was generated using the Multizone Quad method and Inflation tool 
+          in Ansys Meshing.
           To obtain the appropriate first layer height and total height of the inflation layer, the physical boundary layer height and target y+ values 
           at the nozzle throat were estimated using a Reynolds number of 5000. The displacement height of the flow was calculated using the formula for bounded
           turbulent flows: 
           \[\delta(x) = 1.72\sqrt{\frac{\mu x}{\rho u_{avg}}}\]
-          yielding a value of approximately 3e-4m. A target value for y+ was set at 1 to adequately capture the viscous sub-layer of the boundary layer. 
-          In theory, the formula
+          yielding a value of approximately 3e-4m. Therefore, the BL was generated with a total height greater than 3e-4m to ensure total capture of the 
+          boundary layer. A target value for y+ was set at 1 to adequately capture the viscous sub-layer of the boundary layer. In theory, the formula
           \[y^{+} = \frac{\rho y u}{\mu}\] 
           can be used to calculate the first layer height. In practice, the first layer was refined iteratively until the target y+ was reached. A summary of
           the final inflation layer settings is shown below. 
@@ -108,8 +122,7 @@
           />
         </figure>
 
-          In accordance with a mesh convergence study, an edge length of 1.5e-4m was used for the body of the mesh, resulting in a mesh with 116k elements. 
-          A representative image of the mesh at the throat and sudden expansion is shown below. 
+          The final mesh contained approximately 116k cells. A representative image of the mesh at the throat and sudden expansion is shown below. 
           
         <figure>
           <img
@@ -125,58 +138,37 @@
 
       <!-- BCs-->
       <section id="boundaries">
-        <h3>Boundary and Initial Conditions</h3>
+        <h3>Boundary Conditions</h3>
         <ul>
-          <li>North, south, and east walls: isothermal rigid slip walls</li>
-          <li>West wall: isothermal slip wall moving east with constant velocity of 5m/s </li>
-          <li>Fluid: air</li>
-          <li>Temperature: 293K, 1atm </li>
-          <li>Pressure: 101,000 Pa </li>
+          <li>Inlet: velocity inflow of 0.4607m/s and 5% turbulence intensity </li>
+          <li>Outlet: zero-pressure outlet </li>
+          <li>Walls: no-slip </li>
+          <li>Axis: axisymmetry </li>
+          <li>Fluid: incompressible blood analog with density 1056 kg/m^3 and viscosity 3.5 cP</li>
         </ul>
-        <figure>
-          <img
-            src="https://MHamm9401.github.io/figures/computational_setup_BC.png"
-            width="66%"
-            class="center"
-          />
-        </figure>
       </section>
 
       <!-- BCs-->
-      <section id="wall">
-        <h4>Moving Wall Boundary Condition</h4>
-        <p>
-          The moving wall is implemented in two steps. In the first step, the program identifies which mesh elements the wall is currently in and imposes 
-          a rigid slip wall condition on their west face. However, this approach can only capture element-sized movements of the wall. In order to capture 
-          intra-element movement, a second step is needed. In the second step, the program calculates the fraction of the cell occupied by the wall \(f_{wall}\) 
-          and uses it to update the variables in cells adjacent to the wall. Pressure is simply extrapolated from the adjacent cell. 
-          Velocity is set as a weighted average of the wall's velocity \(u_{wall}\) and the fluid velocity from the previous time step \(u_{fluid}\). 
-          Density is updated based on the change in effective area (i.e., area not occupied by the wall) which is calculated according to the following equations: 
-          The initial area of the cell is \[V_0 = dxdy\]
-          The change in effective area in the current time step is \[\Delta V_{step} = u_{wall}dydt\]
-          The accumulated change in effective area is \[\Delta V_{accumulated} = f_{wall}dxdy\]
-          Finally, the total change in effective area of the cell is \[\frac{\Delta V_{total}}{V_0} 
-          = \frac{(f_{wall}dxdy)(u_{wall}dydt)}{dxdy} 
-          = \frac{f_{wall}u_{wall}dt}{dx}\]
-          Conservation of mass for the control area is \[\rho_0 V_0 = \rho^{'} V^{'} = \rho^{'} (V_0 - \Delta V_{total}) \]
-          where prime denotes the updated variable. Simplification leads to \[\rho^{'} = \frac{\rho_0}{1-\frac{\Delta V}{V_0}}\] 
-          Substituting in the change in effective area yields the formula for updating near-wall density \[\rho^{'} = \frac{\rho_0}{1-\frac{f_{wall}u_{wall}}{dx}}\]
-          Finally, continuity is enforced by finding the mass displaced by the piston and adding it to the adjacent cell.
-        </p>
+      <section id="Equations">
+        <h3>Physical Models Used</h3>
+        <ul>
+          <li>Spatial: 2D axisymmetric </li>
+          <li>Temporal: steady-state </li>
+          <li>Equations: Reynolds Averaged Navier-Stokes (RANS) </li>          
+          <li>Turbulence Model: \(k-\omega SST\)  (RANS) </li>          
+          
+          <li>Walls: no-slip </li>
+          <li>Axis: axisymmetry </li>
+          <li>Fluid: incompressible blood analog with density 1056 kg/m^3 and viscosity 3.5 cP</li>
+        </ul>
       </section>
 
       <!-- Solver-->
       <section id="solver">
-        <h2>Solver</h2>
+        <h2>Solver Settings </h2>
         <ul>
-          <li>Finite Volume Method solver with Lax-Friedrichs artificial viscosity: \[\alpha_{artificial} = \frac{\Delta x^{2}}{2\Delta t}\] </li>
-          <li>2D Euler equations for inviscid compressible flow: 
-            \[\frac{\delta \rho}{\delta t} + \frac{\delta}{\delta x}(\rho u) + \frac{\delta}{\delta y}(\rho v) = 0\]
-            \[\frac{\delta \rho u}{\delta t} + \frac{\delta}{\delta x}(\rho u u) + \frac{\delta}{\delta y}(\rho u v) + \frac{\delta P}{\delta x} = 0\]
-            \[\frac{\delta \rho v}{\delta t} + \frac{\delta}{\delta x}(\rho u v) + \frac{\delta}{\delta y}(\rho v v) + \frac{\delta P}{\delta y} = 0\]
-            \[\frac{\delta E}{\delta t} + \frac{\delta}{\delta x}(u[E + P]) + \frac{\delta}{\delta y}(v[E + P]) = 0\]
-          </li>
-          <li>Thermodynamic model: ideal gas \[P = \rho R T\] </li>
+          <li>steady-state, pressure-based (incompressible) </li>
+          <li>PV Coupling: Coupled method </li>
           <li>Time: transient </li>
           <li>CFL: 0.05 </li>          
           <li>Simulation was advanced until the wall advanced 1m into the domain </li>
