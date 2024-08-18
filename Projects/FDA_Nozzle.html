@@ -117,7 +117,7 @@
         <figure>
           <img
             src="https://MHamm9401.github.io/figures/inflation_settings.png"
-            width="66%"
+            width="40%"
             class="center"
           />
         </figure>
@@ -131,11 +131,9 @@
             class="center"
           />
         </figure>
-          
       </section>
 
       
-
       <!-- BCs-->
       <section id="boundaries">
         <h3>Boundary Conditions</h3>
@@ -155,29 +153,30 @@
           <li>Spatial: 2D axisymmetric </li>
           <li>Temporal: steady-state </li>
           <li>Equations: Reynolds Averaged Navier-Stokes (RANS) </li>          
-          <li>Turbulence Model: \(k-\omega SST\)  (RANS) </li>          
-          
-          <li>Walls: no-slip </li>
-          <li>Axis: axisymmetry </li>
+          <li>Turbulence Model: \(k-\omega SST\)  (RANS) </li> 
           <li>Fluid: incompressible blood analog with density 1056 kg/m^3 and viscosity 3.5 cP</li>
         </ul>
       </section>
 
       <!-- Solver-->
       <section id="solver">
-        <h2>Solver Settings </h2>
-        <ul>
-          <li>steady-state, pressure-based (incompressible) </li>
-          <li>PV Coupling: Coupled method </li>
-          <li>Time: transient </li>
-          <li>CFL: 0.05 </li>          
-          <li>Simulation was advanced until the wall advanced 1m into the domain </li>
-        </ul>
+        <h3>Solver Settings </h3>
+        <p>
+          The steady-state, pressure-based solver was used as the fluid is incompressible. In addition, the following discretization and PV coupling methods
+          were used:
+        </p>
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/settings.png"
+            width="40%"
+            class="center"
+          />
+        </figure>
       </section>
 
       <!-- Results-->
       <section id="results">
-        <h2>Results</h2>
+        <h3>Results</h3>
         
       <video width="700" height="700" controls>
           <source src="https://github.com/MHamm9401/MHamm9401.github.io/raw/main/figures/LF2_Wall_Physics_Long.mp4" 
