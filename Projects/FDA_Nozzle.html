@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <title>Moses Hamm • Piston Fluid-Structure Interaction Simulation </title>
+    <title>Moses Hamm • FDA Benchmark Nozzle Simulation </title>
     <meta name="description" content="Projects collection" />
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -40,9 +40,10 @@
     <main class="container">
       <!-- FSI Overview -->
       <section id="preview">
-        <h2>Piston Fluid-Structure Interaction Simulation</h2>
+        <h2>FDA Benchmark Nozzle Simulation</h2>
         <p>
-          In this project, I simulated compression of an ideal gas in a 2D piston in
+          In this project, I simulated blood flow through the FDA benchmark nozzle at a Reynolds number of 6500 and compared 
+          compression of an ideal gas in a 2D piston in
           Python without the use of dedicated CFD libraries. 
         </p>
       </section>
@@ -50,13 +51,14 @@
 
       <!-- Motivation-->
       <section id="motivation">
-        <h3>Motivation</h3>
+        <h3>Background</h3>
         <p>
-          As a biomedical engineer, I am interested in modeling the cardiovascular system. 
-          In particular, I am interested in cardiac flows, which are often investigated 
-          through fluid-structure interaction simulations with moving walls. I wanted to
-          maintain the concept of a moving wall while simplifying the problem to a practical 
-          level. Therefore, I chose to model a piston compressing an ideal gas. 
+          Per the FDA: "The FDA benchmark nozzle can be used as an early-stage validation of computational fluid dynamic (CFD) models simulating blood flow through blood 
+          contacting devices with comparable geometry and flow features. The early-stage validation is limited 
+          to velocity and pressure data within the benchmark geometries. The tool provides validation data (pressure and velocity field) obtained from 
+          inter-laboratory bench experiments within a generic and simplified nozzle geometry. Modelers can use the pressure and velocity validation data 
+          to perform early-stage validation of their computational fluid dynamics (CFD) model/software before performing any device-specific verification,
+          validation, and credibility assessment."
         </p>
       </section>
 
