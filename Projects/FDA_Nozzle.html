@@ -85,6 +85,42 @@
         </p> 
       </section>
 
+      <!-- Geometry-->
+      <section id="mesh">
+        <h3>Meshing</h3>
+        <p>
+          An unstructured all-quad mesh with inflation layers was generated using the Multizone Quad method and Inflation tool in Ansys Meshing.
+          To obtain the appropriate first layer height and total height of the inflation layer, the physical boundary layer height and target y+ values 
+          at the nozzle throat were estimated using a Reynolds number of 5000. The displacement height of the flow was calculated using the formula for bounded
+          turbulent flows: 
+          \[\delta(x) = 1.72\sqrt{\frac{\mu x}{\rho u_{avg}}}\]
+          yielding a value of approximately 3e-4m. A target value for y+ was set at 1 to adequately capture the viscous sub-layer of the boundary layer. 
+          In theory, the formula
+          \[y^{+} = \frac{\rho y u}{\mu}\] 
+          can be used to calculate the first layer height. In practice, the first layer was refined iteratively until the target y+ was reached. A summary of
+          the final inflation layer settings is shown below. 
+
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/inflation_settings.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+
+          In accordance with a mesh convergence study, an edge length of 1.5e-4m was used for the body of the mesh, resulting in a mesh with 116k elements. 
+          A representative image of the mesh at the throat and sudden expansion is shown below. 
+          
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/mesh.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+          
+      </section>
+
       
 
       <!-- BCs-->
