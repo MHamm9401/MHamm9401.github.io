@@ -252,11 +252,11 @@
       <section id="results">
         <h3>Results  </h3>
         <p>
-          Figures 3d, 4d, 8, and 13g from Stewart et al. were recreated by visualizing the following results:
+          Figures 3d, 4d, 8, and 13g from Stewart et al. were recreated by visualizing the following results and comparing them to experimental data:
         <ul>
           <li>Axial velocity along the centerline (Figure 3d)</li>
           <li>Nozzle wall pressure relative to the wall pressure at the sudden expansion (Figure 4d)</li>
-          <li>Axial velocity profiles at slices shown below (Figure 8)</li>
+          <li>Axial velocity profiles at every other slice shown below (Figure 8)</li>
           <li>Wall shear stress as a function of axial position (Figure 13g)</li>
         </ul>
 
@@ -267,11 +267,71 @@
             class="center"
           />
         </figure>
-      
         </p>
-      </section>
+
+      <h4>Axial Velocity Along the Centerline  </h4>
+      <p>
+      When compared to experimental PIV data, the \(SST k-\omega\) model underestimates axial velocity, an effect which is most pronounced 
+      in the constricted region. However, the \(SST k-\omega\) model predicts the jet breakdown location well. This is likely due to the fact that 
+      the flow upstream of the throat is laminar. As shown in the axial velocity profiles, turbulent flow profiles are 
+      more blunted, resulting in a lower centerline velocity when compared to laminar pipe flow. This partially explains the underestimation of the centerline 
+      velocity upstream of the nozzle throat. 
+      <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/Centerline_Velocity.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+      </p>
     
+      <h4>Nozzle Wall Pressure </h4>
+      <p>
+      When compared to experimental data from a pressure tap model, the \(SST k-\omega\) model underestimates the wall pressure upstream of the constriction, 
+      but provides very accurate pressure values in the constriction, throat, and recirculation regions. 
+      <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/Wall_Pressure.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+      </p>
     
+      <h4>Axial Velocity Profiles </h4>
+      <p>
+      As shown in panels a-c, the \(SST k-\omega\) model consistently underestimates axial velocity and presents with a much more blunt velocity profile 
+      upstream of the throat. Downstream of the throat (panels d-f), the simulation accurately predicted that there would be reversed flow and matched 
+      the velocity profiles well, qualitatively. As is to be expected from a RANS simulation, flow features 
+      are smoothed out compared to the experimental data. 
+      
+      <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/all_profiles.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+      </p>
+
+      <h4>Wall Shear Stress </h4>
+      <p>
+      WSS at the entrance is high due to the use of a plug flow BC instead of a developed velocity profile BC.  
+      As is expected, WSS is low initially and increases rapidly as flow accelerates into the constriction. In addition, 
+      WSS just downstream of the throat is higher than elsewhere in the outlet. This is likely due to the 
+      presence of turbulent eddies in the jet breakdown region which cause enhanced WSS. Further downstream, as laminar flow 
+      returns, WSS returns to the baseline value. 
+      
+      <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/Axial_WSS.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+      </p>
+      
+    </section>
     </main>
     <!-- ./ Main -->
   </body>
