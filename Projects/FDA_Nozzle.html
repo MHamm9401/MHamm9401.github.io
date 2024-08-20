@@ -71,7 +71,6 @@
           <ul>
             <li>qualitative descriptions of flow through the FDA benchmark nozzle at Re=6500</li>
             <li>qualitative comparisons to experimental data </li>
-            <li>quantitative steady-state results in the form of pressure drop across the nozzle and jet velocity</li>
           </ul> 
         </p>
       </section>
@@ -154,8 +153,7 @@
           <li>Spatial: 2D axisymmetric </li>
           <li>Temporal: steady-state </li>
           <li>Equations: Reynolds Averaged Navier-Stokes (RANS) </li>          
-          <li>Turbulence Model: \(SST\) \(k-\omega\)  (RANS) </li> 
-          <li>Fluid: incompressible blood analog with density 1056 kg/m^3 and viscosity 3.5 cP</li>
+          <li>Turbulence Model: \(SST\) \(k-\omega\) </li> 
         </ul>
       </section>
 
@@ -244,7 +242,7 @@
             class="center"
           />
         </figure>
-        All meshes passed the quantitative convergence criteria. However, due to the qualitative difference in axial velocity profiles between 
+        All meshes passed the quantitative convergence criteria. However, due to the qualitative difference in axial velocity distributions between 
         the coarse mesh and the others, the medium mesh was selected for use in subsequent simulations. 
         </p>
       </section>
@@ -302,7 +300,7 @@
       <h4>Axial Velocity Profiles </h4>
       <p>
       As shown in panels a-c, the \(SST\) \(k-\omega\) model consistently underestimates axial velocity and presents with a much more blunt velocity profile 
-      upstream of the throat. Downstream of the throat (panels d-f), the simulation accurately predicted that there would be reversed flow and matched 
+      upstream of the throat. Downstream of the throat (panels d-f), the simulation accurately predicts reversed flow and matches 
       the velocity profiles well, qualitatively. As is to be expected from a RANS simulation, flow features 
       are smoothed out compared to the experimental data. 
       
