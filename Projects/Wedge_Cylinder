@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- HEADING DOES NOT PRINT TO THE SCREEN -->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Moses Hamm • Artistic Display of Research</title>
+    <meta name="description" content="Projects collection" />
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Pico.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css"
+    />
+
+    <style>
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    </style>    
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="container">
+      <hgroup>
+        <h1>Moses Hamm • Projects</h1>
+        <p>To view the entire collection of simulation, coding, and physical projects, click <a href="/index.html">here</a>. 
+          For questions, contact me at hammmj@purdue.edu or <a href="https://www.linkedin.com/in/moses-hamm">www.linkedin.com/in/moses-hamm!</a>
+        </p>
+      </hgroup>
+    </header>
+    <!-- ./ Header -->
+    
+    <!-- Main -->
+    <main class="container">
+      <!-- FSI Overview -->
+      <section id="preview">
+        <h2>Artistic Display of Research</h2>
+        <p>
+          The goal of the Artistic Display of Research exhibition and competition is to creatively highlight the research of BME undergraduate, 
+          graduate and post-doc students in a visually appealing way. 
+        </p>
+      </section>
+      <!-- ./ FSI Overview -->
+
+      <!-- Motivation-->
+      <section id="motivation">
+        <h3>Evolution of Turbulence in Stenotic Blood Flow</h3>
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/Turbulence_Github.jpg"
+            class="center"
+          /> 
+          </figure> <br>
+        <p>
+          Pulsatile blood flow past a stenosis with a peak Reynolds number of 3500 was simulated using open-source computational fluid dynamics 
+          software SimVascular. This Reynolds number resulted in a transition to turbulence. In order to capture all scales of turbulence, the Kolmogorov
+          length scale was estimated, and the mesh resolution was set accordingly. Results were analyzed in Paraview (an open-source software). Streamlines 
+          were generated, and corresponding vortex cores were visualized using Q-criterion isosurfaces. Interesting flow structures were then isolated and 
+          used to create two symmetric patterns. <br> <br>
+
+          Turbulent blood flow is associated with increased shear stress on artery walls and red blood cells, negatively affecting blood vessel wall remodeling.
+          The transition from laminar to turbulent flow due to a stenosed blood vessel was simulated using computational fluid dynamics (CFD). Simulation results
+          are visualized in the middle panel of this figure. Upstream, flow streamlines are smooth and ordered. Downstream, velocity increases and chaotic 
+          vortices quickly form. To generate the side panels, flow structures and vortex cores from the transitional (left panel) and turbulent (right panel)
+          flow regions were extracted and arranged in kaleidoscope-like patterns.
+        </p>
+          
+
+      </section>
+
+      <!-- Geometry-->
+      <section id="geometry">
+        <h3>Awards</h3>
+        <p>
+          My entry won the Promoting Engineering – Medicine Partnership Award in the undergraduate-level and overall competitions. 
+        </p>
+
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/IMG_3784.jpeg"
+            width="66%"
+            class="center"
+          /> 
+          </figure> <br>
+      </section>
+
+    </main>
+    <!-- ./ Main -->
+  </body>
+
+  
+</html>
