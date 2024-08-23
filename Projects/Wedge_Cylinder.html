@@ -1,98 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
-  <!-- HEADING DOES NOT PRINT TO THE SCREEN -->
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <title>Moses Hamm • Artistic Display of Research</title>
-    <meta name="description" content="Projects collection" />
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {box-sizing: border-box;}
 
-    <!-- Pico.css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css"
-    />
+.img-comp-container {
+  position: relative;
+  height: 200px; /*should be the same height as the images*/
+}
 
-    <style>
-    img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+.img-comp-img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow:hidden;
+}
+
+.img-comp-img img {
+  display:block;
+  vertical-align:middle;
+}
+
+.img-comp-slider {
+  position: absolute;
+  z-index:9;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  width: 40px;
+  height: 40px;
+  background-color: #2196F3;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+</style>
+<script>
+function initComparisons() {
+  var x, i;
+  /*find all elements with an "overlay" class:*/
+  x = document.getElementsByClassName("img-comp-overlay");
+  for (i = 0; i < x.length; i++) {
+    /*once for each "overlay" element:
+    pass the "overlay" element as a parameter when executing the compareImages function:*/
+    compareImages(x[i]);
+  }
+  function compareImages(img) {
+    var slider, img, clicked = 0, w, h;
+    /*get the width and height of the img element*/
+    w = img.offsetWidth;
+    h = img.offsetHeight;
+    /*set the width of the img element to 50%:*/
+    img.style.width = (w / 2) + "px";
+    /*create slider:*/
+    slider = document.createElement("DIV");
+    slider.setAttribute("class", "img-comp-slider");
+    /*insert slider*/
+    img.parentElement.insertBefore(slider, img);
+    /*position the slider in the middle:*/
+    slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+    slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+    /*execute a function when the mouse button is pressed:*/
+    slider.addEventListener("mousedown", slideReady);
+    /*and another function when the mouse button is released:*/
+    window.addEventListener("mouseup", slideFinish);
+    /*or touched (for touch screens:*/
+    slider.addEventListener("touchstart", slideReady);
+    /*and released (for touch screens:*/
+    window.addEventListener("touchend", slideFinish);
+    function slideReady(e) {
+      /*prevent any other actions that may occur when moving over the image:*/
+      e.preventDefault();
+      /*the slider is now clicked and ready to move:*/
+      clicked = 1;
+      /*execute a function when the slider is moved:*/
+      window.addEventListener("mousemove", slideMove);
+      window.addEventListener("touchmove", slideMove);
     }
-    </style>    
-  </head>
+    function slideFinish() {
+      /*the slider is no longer clicked:*/
+      clicked = 0;
+    }
+    function slideMove(e) {
+      var pos;
+      /*if the slider is no longer clicked, exit this function:*/
+      if (clicked == 0) return false;
+      /*get the cursor's x position:*/
+      pos = getCursorPos(e)
+      /*prevent the slider from being positioned outside the image:*/
+      if (pos < 0) pos = 0;
+      if (pos > w) pos = w;
+      /*execute a function that will resize the overlay image according to the cursor:*/
+      slide(pos);
+    }
+    function getCursorPos(e) {
+      var a, x = 0;
+      e = (e.changedTouches) ? e.changedTouches[0] : e;
+      /*get the x positions of the image:*/
+      a = img.getBoundingClientRect();
+      /*calculate the cursor's x coordinate, relative to the image:*/
+      x = e.pageX - a.left;
+      /*consider any page scrolling:*/
+      x = x - window.pageXOffset;
+      return x;
+    }
+    function slide(x) {
+      /*resize the image:*/
+      img.style.width = x + "px";
+      /*position the slider:*/
+      slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+    }
+  }
+}
+</script>
+</head>
+<body>
 
-  <body>
-    <!-- Header -->
-    <header class="container">
-      <hgroup>
-        <h1>Moses Hamm • Projects</h1>
-        <p>To view the entire collection of simulation, coding, and physical projects, click <a href="/index.html">here</a>. 
-          For questions, contact me at hammmj@purdue.edu or <a href="https://www.linkedin.com/in/moses-hamm">www.linkedin.com/in/moses-hamm!</a>
-        </p>
-      </hgroup>
-    </header>
-    <!-- ./ Header -->
-    
-    <!-- Main -->
-    <main class="container">
-      <!-- FSI Overview -->
-      <section id="preview">
-        <h2>Artistic Display of Research</h2>
-        <p>
-          The goal of the Artistic Display of Research exhibition and competition is to creatively highlight the research of BME undergraduate, 
-          graduate and post-doc students in a visually appealing way. 
-        </p>
-      </section>
-      <!-- ./ FSI Overview -->
+<h1>Compare Two Images</h1>
 
-      <!-- Motivation-->
-      <section id="motivation">
-        <h3>Evolution of Turbulence in Stenotic Blood Flow</h3>
-        <figure>
-          <img
-            src="https://MHamm9401.github.io/figures/Turbulence_Github.jpg"
-            class="center"
-          /> 
-          </figure> <br>
-        <p>
-          Pulsatile blood flow past a stenosis with a peak Reynolds number of 3500 was simulated using open-source computational fluid dynamics 
-          software SimVascular. This Reynolds number resulted in a transition to turbulence. In order to capture all scales of turbulence, the Kolmogorov
-          length scale was estimated, and the mesh resolution was set accordingly. Results were analyzed in Paraview (an open-source software). Streamlines 
-          were generated, and corresponding vortex cores were visualized using Q-criterion isosurfaces. Interesting flow structures were then isolated and 
-          used to create two symmetric patterns. <br> <br>
+<p>Click and slide the blue slider to compare two images:</p>
 
-          Turbulent blood flow is associated with increased shear stress on artery walls and red blood cells, negatively affecting blood vessel wall remodeling.
-          The transition from laminar to turbulent flow due to a stenosed blood vessel was simulated using computational fluid dynamics (CFD). Simulation results
-          are visualized in the middle panel of this figure. Upstream, flow streamlines are smooth and ordered. Downstream, velocity increases and chaotic 
-          vortices quickly form. To generate the side panels, flow structures and vortex cores from the transitional (left panel) and turbulent (right panel)
-          flow regions were extracted and arranged in kaleidoscope-like patterns.
-        </p>
-          
+<div class="img-comp-container">
+  <div class="img-comp-img">
+    <img src="https://MHamm9401.github.io/figures/Featured.jpg" width="562" height="800">
+  </div>
+  <div class="img-comp-img img-comp-overlay">
+    <img src="https://MHamm9401.github.io/figures/final_wedge.jpeg" width="562" height="800">
+  </div>
+</div>
 
-      </section>
+<script>
+/*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
+initComparisons();
+</script>
 
-      <!-- Geometry-->
-      <section id="geometry">
-        <h3>Awards</h3>
-        <p>
-          My entry won the Promoting Engineering – Medicine Partnership Award in the undergraduate-level and overall competitions. 
-        </p>
-
-        <figure>
-          <img
-            src="https://MHamm9401.github.io/figures/IMG_3784.jpeg"
-            width="66%"
-            class="center"
-          /> 
-          </figure> <br>
-      </section>
-
-    </main>
-    <!-- ./ Main -->
-  </body>
-
-  
+</body>
 </html>
