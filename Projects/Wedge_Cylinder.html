@@ -201,7 +201,8 @@ initComparisons();
                 <li>The distance between each vortex core and the corner is half that of its neighbor above </li>
                 <li>The dividing streamline between each vortex is concave upward </li>
             </ul>. 
-            All of these flow features are well-represented in the computational recreation. 
+            All of these flow features are well-represented in the computational recreation. In addition, the simulation allows the 
+            third vortex in the sequence to be visualized where the experiment did not. 
         </p>
       </section>
       <!-- ./ FSI Overview -->   
@@ -210,75 +211,28 @@ initComparisons();
       <section id="mesh">
         <h3>Meshing</h3>
         <p>
-          An unstructured all-quad mesh with edge lengths of 1.5e-4m and 25 inflation layers was generated using the Multizone Quad method and Inflation tool 
-          in Ansys Meshing.
-          To obtain the appropriate first layer height and total height of the inflation layer, the physical boundary layer height and target y+ values 
-          at the nozzle throat were estimated using a Reynolds number of 5000. The displacement height of the flow was calculated using the formula for bounded
-          turbulent flows: 
-          \[\delta(x) = 1.72\sqrt{\frac{\mu x}{\rho u_{avg}}}\]
-          yielding a value of approximately 3e-4m. Therefore, the BL was generated with a total height greater than 3e-4m to ensure total capture of the 
-          boundary layer. A target value for y+ was set at 1 to adequately capture the viscous sub-layer of the boundary layer. In theory, the formula
-          \[y^{+} = \frac{\rho y u}{\mu}\] 
-          can be used to calculate the first layer height. In practice, the first layer was refined iteratively until the target y+ was reached. A summary of
-          the final inflation layer settings is shown below. 
-
-        <figure>
-          <img
-            src="https://MHamm9401.github.io/figures/inflation_settings.png"
-            width="40%"
-            class="center"
-          />
-        </figure>
-
-          The final mesh contained approximately 116k cells. A representative image of the mesh at the throat and sudden expansion is shown below. 
+            The 2D computational domain was split into 4 pieces. The near-cylinder region was meshed using an unstructured quad dominant mesh with refinement 
+            on the wall of the cylinder. After this piece, the rest of the wedge was split into a Y-block mesh as shown below. The use of a Y-block 
+            architecture allows triangular domains to be meshed using only quadrilateral elements, greatly enhancing computational efficiency and accuracy 
+            compared to tetrahedral mesh elements. The final mesh contained approximately 27k cells. A representative image of the mesh is shown below. 
           
         <figure>
           <img
-            src="https://MHamm9401.github.io/figures/mesh.png"
+            src="https://MHamm9401.github.io/figures/mesh_wedge.png"
             width="66%"
             class="center"
           />
         </figure>
       </section>
 
-      
-      <!-- BCs-->
-      <section id="boundaries">
-        <h3>Boundary Conditions</h3>
-        <ul>
-          <li>Inlet: velocity inflow of 0.4607m/s and 5% turbulence intensity </li>
-          <li>Outlet: zero-pressure outlet </li>
-          <li>Walls: no-slip </li>
-          <li>Axis: axisymmetry </li>
-          <li>Fluid: incompressible blood analog with density 1056 kg/m^3 and viscosity 3.5 cP</li>
-        </ul>
-      </section>
-
       <!-- BCs-->
       <section id="Equations">
         <h3>Physical Models Used</h3>
         <ul>
-          <li>Spatial: 2D axisymmetric </li>
+          <li>Spatial: 2D </li>
           <li>Temporal: steady-state </li>
-          <li>Equations: Reynolds Averaged Navier-Stokes (RANS) </li>          
-          <li>Turbulence Model: \(SST\) \(k-\omega\) </li> 
+          <li>Equations: Steady-State Stokes Equations</li>          
         </ul>
-      </section>
-
-      <!-- Solver-->
-      <section id="solver">
-        <h3>Solver Settings </h3>
-        <p>
-          The steady-state, pressure-based solver was used as the fluid is incompressible. In addition, the following discretization and PV coupling methods
-          were used:
-        </p>
-        <figure>
-          <img
-            src="https://MHamm9401.github.io/figures/settings.png"
-            width="25%"
-            class="center"
-          />
-        </figure>
       </section>
 
 </body>
