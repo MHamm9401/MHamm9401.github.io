@@ -211,13 +211,13 @@
 
       <!-- Results-->
       <section id="results">
-        <h3>Grid Convergence v2</h3>
+        <h3>Grid Convergence</h3>
         <p>
           A grid convergence study using four meshes was performed at Re=5000 as per the methods section of Stewart et al. All meshes shared the 
           same inflation layer, and the body mesh sizing was halved each time, achieving a grid refinement ratio \(r\) of 2. The edge length and
           element count for each mesh were: 
         <ul>
-          <li>Coarsest: 6e-4m (42k elements)</li>
+          <li>Coarsest: 6e-4m (23k elements)</li>
           <li>Coarse: 3e-4m (42k elements)</li>
           <li>Medium: 1.5e-4m (117k elements)</li>
           <li>Fine: 7.5e-5m (360k elements)</li>
@@ -267,45 +267,6 @@
         \[\frac{GCI_{coarse}}{r^p GCI_{medium}} a\overset{?}{=} 1\] lead to a ratio of 0.99994, indicating that 
         results were well converged. Because of the small \(GCI\) for the medium mesh, and its good qualitative agreement with the fine mesh
         for the jet breakdown region, the medium mesh was selected for use in further simulations. 
-        
-      </section>
-      
-      <!-- Results-->
-      <section id="results">
-        <h3>Grid Convergence</h3>
-        <p>
-          A grid convergence study using four meshes was performed at Re=5000 as per the methods section of Stewart et al. All meshes shared the 
-          same inflation layer, and the body mesh sizing was varied 
-          such that the number of elements roughly doubled with each level of refinement. The edge length and element count for each mesh were: 
-        <ul>
-          <li>Coarse: 3e-4m (42k elements)</li>
-          <li>Medium: 1.5e-4m (117k elements)</li>
-          <li>Fine: 1e-4m (220k elements)</li>
-          <li>Finest: 7.5e-5m (360k elements)</li>
-        </ul>
-          Recreating Figure 14 from Stewart et al., the axial velocity at the centerline downstream of the throat was plotted for each case to assess qualitative convergence. These results showed that 
-          the coarse mesh deviates from the others in its prediction of the jet breakdown region, but that the medium mesh matches the fine and finest meshes. 
-        
-        <figure>
-          <img
-            src="https://MHamm9401.github.io/figures/axial_vel_grid.png"
-            width="66%"
-            class="center"
-          />
-        </figure>
-        In addition, the total pressure drop over the length of the nozzle and maximum jet velocity were calculated for each mesh and compared to the finest grid. A convergence 
-        criteria of 2% was used to quantitatively assess convergence. 
-
-        <figure>
-          <img
-            src="https://MHamm9401.github.io/figures/table_error.png"
-            width="40%"
-            class="center"
-          />
-        </figure>
-        All meshes passed the quantitative convergence criteria. However, due to the qualitative difference in axial velocity distributions between 
-        the coarse mesh and the others, the medium mesh was selected for use in subsequent simulations. 
-        </p>
       </section>
 
       <!-- Results-->
