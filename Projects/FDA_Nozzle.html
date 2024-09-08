@@ -208,6 +208,66 @@
         </ul>  
         </p>
       </section>
+
+      <!-- Results-->
+      <section id="results">
+        <h3>Grid Convergence v2</h3>
+        <p>
+          A grid convergence study using four meshes was performed at Re=5000 as per the methods section of Stewart et al. All meshes shared the 
+          same inflation layer, and the body mesh sizing was halved each time, achieving a grid refinement ratio \(r\) of 2. The edge length and
+          element count for each mesh were: 
+        <ul>
+          <li>Coarsest: 6e-4m (42k elements)</li>
+          <li>Coarse: 3e-4m (42k elements)</li>
+          <li>Medium: 1.5e-4m (117k elements)</li>
+          <li>Fine: 7.5e-5m (360k elements)</li>
+        </ul>
+          Recreating Figure 14 from Stewart et al., the axial velocity at the centerline downstream of the throat was plotted for each case to assess qualitative convergence. These results showed that 
+          the coarse mesh deviates from the others in its prediction of the jet breakdown region, but that the medium mesh matches the fine mesh. 
+        
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/axial_vel_grid.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+        In addition, the pressure drop at the nozzle throat was calculated for each mesh and used to calculate the order of convergence \(p\) and grid 
+        convergence index \(GCI\) per the <a href="https://www.grc.nasa.gov/www/wind/valid/tutorial/spatconv.html">NASA Spatial Convergance Guide</a>.
+
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/p_drop_plot.png"
+            width="66%"
+            class="center"
+          />
+        </figure>
+
+        <figure>
+          <img
+            src="https://MHamm9401.github.io/figures/p_drop_table.png"
+            width="40%"
+            class="center"
+          />
+        </figure>
+
+        From the data shown above, the order of convergence \(p\) was calculated using the equation:
+        \[p=ln(\frac{f_3 - f_2}{f_2 - f_1}) / ln(r)\] where \(f_3\) is the coarse grid, \(f_2\) is the medium 
+        grid, and \(f_1\) is the fine grid. Using this equation, the order of convergence was 
+        determined to be 6.58789. Next, the grid convergence index \(GCI\) was calculated between the medium 
+        and fine meshes and between the coarse and medium meshes using the equation: 
+        \[GCI_medium = \frac{F_s |\epsilon| r^p}{r^p - 1}\] where \(\epsilon\) is the fractional relative error 
+        between meshes and \(F_s\) is a safety factor of 1.25 suggested by NASA when computing grid convergence 
+        over three or more meshes. Using this equation, the grid convergence index was determined to be 7.13738e-5 
+        between the medium and fine meshes and 6.86541e-3 between the coarse and medium meshes. Finally, 
+        the solutions were checked to ensure they were in the asymptotic range of convergence. This was done by ensuring that 
+        the equation \(GCI_{coarse} = r^p GCI_{medium}\) is approximately satisfied. If the ratio of the two values is 
+        very close to one, the results both fall within the asymptotic range of mesh convergence, indicating that 
+        the results are well converged. In our case, rearranging the equation to take the form 
+        \[\frac{GCI_{coarse}}{r^p GCI_{medium}} a\overset{?}{=} 1\] lead to a ratio of 0.99994, indicating that 
+        results were well converged.     
+        
+      </section>
       
       <!-- Results-->
       <section id="results">
